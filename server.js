@@ -119,7 +119,14 @@ app.get('/admin', async (req, res) => {
 });
 
 
+const express = require("express");
+const app = express();
+
 const PORT = process.env.PORT || 10000;
+
+app.get("/", (req, res) => {
+  res.send("서버 정상 작동 중 🚀");
+});
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log("Server running on port " + PORT);
