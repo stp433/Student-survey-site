@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>학생 설문 사이트</title></head>
+<body>
+<h1>설문 목록</h1>
+<div id="posts"></div>
+
+<h2>설문 작성</h2>
+<form action="/posts" method="POST">
+제목: <input name="title"><br>
+설명: <input name="description"><br>
+옵션(콤마로 구분): <input name="options"><br>
+<button type="submit">작성</button>
+</form>
+
+<script>
+fetch('/posts')
+.then(res => res.json())
+.then(data => {
+  const div = document.getElementById('posts');
+  data.forEach(post => {
+    div.innerHTML += `
+      <h3>${post.title}</h3>
+      <form action="/vote/${post._id}" method="POST">
+        ${post.options.map(o => `<button name="option" value="${o}">${o}</button>`).join('')}
+      </form>
+    `;
+  });
+});
+</script>
+</body>
+</html>
