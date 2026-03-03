@@ -118,4 +118,9 @@ app.get('/admin', async (req, res) => {
   res.json({ users, posts });
 });
 
-app.listen(3000, () => console.log('Server started on port 3000'));
+
+const PORT = process.env.PORT || 10000;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log("Server running on port " + PORT);
+});
